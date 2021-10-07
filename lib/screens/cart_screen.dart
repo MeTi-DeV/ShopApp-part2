@@ -17,7 +17,22 @@ class CartScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Card(
+         
+          Expanded(
+            child: ListView.builder(
+              itemCount: cart.items.length,
+              itemBuilder: (BuildContext context, int index) => Container(
+                child: CartItem(
+                  cart.items.values.toList()[index].id,
+                  cart.items.keys.toList()[index],
+                  cart.items.values.toList()[index].title,
+                  cart.items.values.toList()[index].price,
+                  cart.items.values.toList()[index].quantity,
+                ),
+              ),
+            ),
+          ),
+           Card(
             margin: EdgeInsets.all(5),
             child: Padding(
               padding: EdgeInsets.all(8.0),
@@ -40,7 +55,6 @@ class CartScreen extends StatelessWidget {
                   ),
                   Spacer(),
                   RaisedButton(
-                    //comment 1 : here get all functions like addToOrder , CartClear , and route for go to ordersScreen
                     onPressed: () {
                       Navigator.of(context)
                           .pushReplacementNamed(OrdersScreen.routeName);
@@ -56,21 +70,6 @@ class CartScreen extends StatelessWidget {
                     ),
                   )
                 ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: cart.items.length,
-              itemBuilder: (BuildContext context, int index) => Container(
-                child: CartItem(
-                  cart.items.values.toList()[index].id,
-                  //comment 2 : here pass each item key as productId to CartItem
-                  cart.items.keys.toList()[index],
-                  cart.items.values.toList()[index].title,
-                  cart.items.values.toList()[index].price,
-                  cart.items.values.toList()[index].quantity,
-                ),
               ),
             ),
           ),
