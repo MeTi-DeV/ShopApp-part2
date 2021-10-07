@@ -55,14 +55,34 @@ class Cart with ChangeNotifier {
     return total;
   }
 
-  //comment 1 : here create removeItem handler for remove each item in cart
   void removeItem(String productId) {
     _items.remove(productId);
     notifyListeners();
   }
-//comment 2 : add CartClear for clear cart list when add all  cart items to order screen
+
   void CartClear() {
     _items = {};
+    notifyListeners();
+  }
+//comment 1 : create a new function for SnackBarAction()
+  void removeRecentItem(String productId) {
+    //comment 2 : here determined if there is not any item in cartitem list with this id do nothing
+    if (!_items.containsKey(productId)) {
+      return;
+    }
+    // comment 3 : here determined if there is a item in cart list with this id decrease just one count of that in cartitem list
+    if (_items[productId]!.quantity > 1) {
+      _items.update(
+          productId,
+          (existingItem) => CartItem(
+              id: existingItem.id,
+              title: existingItem.title,
+              price: existingItem.price,
+              quantity: existingItem.quantity - 1));
+    } else {
+      //comment 4 : here determined if there is just a count of this product by this id delete that from my cart
+      _items.remove(productId);
+    }
     notifyListeners();
   }
 }
