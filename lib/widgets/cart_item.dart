@@ -13,21 +13,16 @@ class CartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: ValueKey(id),
-      //comment 1 : here add a message  for delete items from cartlist
-      // for apply this property use confirmDismiss
       confirmDismiss: (direction) {
-        //comment 2 : showDialog create message
         return showDialog(
           context: context,
-          //comment 3 : pass AlertDialog as builder function to create message body
           builder: (ctx) => AlertDialog(
             title: Text('Delete Item'),
             content: Text('Are you sure you want to delete ${title}'),
             actions: [
               FlatButton(
                 color: null,
-                //comment 4 : for No button use Navigator.of(ctx).pop(false) to cancel last action user do that here last action of user was swipe to left for delete an item of cart list ,
-               // Navigator.of(ctx).pop(false) cancel this action of user
+               
                 onPressed: () => Navigator.of(ctx).pop(false),
                 child: Text(
                   'No',
@@ -36,7 +31,6 @@ class CartItem extends StatelessWidget {
               ),
               FlatButton(
                 color: null,
-                //comment 5 : here Yes , is exactly like No button behavior, The difference is that apply last action of user was swipe to left for delete an item
                 onPressed: () => Navigator.of(ctx).pop(true),
                 child: Text(
                   'Yes',
