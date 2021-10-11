@@ -43,11 +43,23 @@ class Products with ChangeNotifier {
   Product findById(String id) {
     return _items.firstWhere((product) => product.id == id);
   }
+
   List<Product> get FavoriteList {
     return _items.where((productItem) => productItem.isFavorite).toList();
   }
 
-  void addProducts() {
+//comment 1 : create a function for add new products
+// addProducts get widget as argument
+// and save all of data from new product to a variable like newProduct
+  void addProducts(Product product) {
+    final newProduct = Product(
+        id: DateTime.now().toString(),
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl);
+// after use .add() method to pass new product as parameter and asignment to general list
+    _items.add(newProduct);
     notifyListeners();
   }
 }

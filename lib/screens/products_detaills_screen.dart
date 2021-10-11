@@ -15,7 +15,6 @@ class ProductsDetaillsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(loadProducts.title),
       ),
-      //comment : make a simple screen  for each product as details screen
       body: Container(
         child: Column(
           children: [
