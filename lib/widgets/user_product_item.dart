@@ -10,9 +10,8 @@ class UserProductItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal:5),
       child: ListTile(
         title: Text(title),
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(imageUrl),
-        ),
+        leading: CircleAvatar(backgroundImage:NetworkImage(imageUrl.toString()),),
+
         trailing: Container(
           width: 100,
           child: Row(
