@@ -12,7 +12,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
-    // comment 1 : get Cart class for addItem handler to Cart
+    
     final cart = Provider.of<Cart>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -42,15 +42,11 @@ class ProductItem extends StatelessWidget {
             onPressed: () {
               cart.addItem(product.id, product.title, product.price);
               Scaffold.of(context).hideCurrentSnackBar();
-              //comment 1 : add SnackBar for back to previous state of cart items
-              // use Scaffold here for connecting to latest Scaffold of screen and show our content on that screen
-              //comment 2 : here use .showSnackBar for show a bar down side of the screen and show a message on that screen with a button like undo button
+              
               Scaffold.of(context).showSnackBar(SnackBar(
-                //comment 3 : for the message of SnackBar content use Text()
-                //and for time to show the message use Duration(seconds:)
+                
                 content: Text('You add new product to your cart'),
                 duration: Duration(seconds: 1),
-                //comment 4 : action : SnackBarAction is for our button that we want do some behavior like here that we want to back previous state of cart items with undo button
                 action: SnackBarAction(
                     label: 'UNDO',
                     onPressed: () => cart.removeRecentItem(product.id)),

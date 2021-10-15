@@ -37,7 +37,7 @@ class Cart with ChangeNotifier {
             quantity: 1),
       );
     }
-    print(_items.keys);
+
     notifyListeners();
   }
 
