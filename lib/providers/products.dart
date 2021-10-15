@@ -48,9 +48,6 @@ class Products with ChangeNotifier {
     return _items.where((productItem) => productItem.isFavorite).toList();
   }
 
-//comment 1 : create a function for add new products
-// addProducts get widget as argument
-// and save all of data from new product to a variable like newProduct
   void addProducts(Product product) {
     final newProduct = Product(
         id: DateTime.now().toString(),
@@ -58,8 +55,42 @@ class Products with ChangeNotifier {
         description: product.description,
         price: product.price,
         imageUrl: product.imageUrl);
-// after use .add() method to pass new product as parameter and asignment to general list
-    _items.add(newProduct);
+    //comment 1 : for add new created product can use insert or add methods but different between these methods
+    // is if use Insert() add new product in top of list
+    //but if use Add() add new product to Following list
+    _items.insert(0, newProduct);
+    notifyListeners();
+  }
+
+  //comment 2 : must important function is this function for make editable all products that will be added or was in our list
+  //comment 3 : first define parameters for function need ID of product and pass data of product we resivied in EditProductScreen
+  // as second parameter
+  void updateProduct(String id, Product newProduct) {
+    //comment 4 : at the first use .indexWhere() for find specific product that has an unique id and we created it time ago
+    // here we call this product again by define a variable like prodIndex
+    // return value of items.indexWhere((prod) => prod.id == id) is a place of product in list product array for example: maybe that product has a unique id : 'p2' and the place of this id is [1]
+    // we save the product place number in product list array or(_items) in prodIndex
+    final proIndex = items.indexWhere((prod) => prod.id == id);
+    //comment 5 : then create an if statement Which it determines(معین میکند)if there was a product with place number in product list array or(_items)
+
+    if (proIndex >= 0) {
+      // instead new data or edited previous product data to current product data and
+      //How?
+      // pass product number place like this : _items[prodIndex]
+      // and replace old data of this product with new data
+      // when define _items[prodIndex]=newProduct
+      _items[proIndex] = newProduct;
+      print(proIndex);
+      notifyListeners();
+    }
+    //comment 6 : otherwise do nothing
+    else {
+      print('...');
+    }
+  }
+
+  void removeProduct(String id) {
+    _items.removeWhere((product) => product.id == id);
     notifyListeners();
   }
 }
